@@ -935,6 +935,34 @@ RUN if [ $INSTALL_PHALCON = true ]; then \
     && rm -rf /tmp/cphalcon* \
 ;fi
 
+#####################################
+# OCI8:
+#####################################
+ARG INSTALL_OCI8=false
+ENV INSTALL_OCI8 ${INSTALL_OCI8}
+COPY ./oci8.ini /tmp/
+COPY ./instantclient-basic-linux.x64-12.2.0.1.0.zip /tmp/
+COPY ./instantclient-sdk-linux.x64-12.2.0.1.0.zip /tmp/
+ENV LD_LIBRARY_PATH /usr/local/instantclient/
+RUN if [ ${INSTALL_OCI8} = true ]; then \
+    apt-get update && \
+    apt-get install -y zip unzip libaio1 wget && \
+    unzip /tmp/instantclient-basic-linux.x64-12.2.0.1.0.zip -d /usr/local/ && \
+    unzip /tmp/instantclient-sdk-linux.x64-12.2.0.1.0.zip -d /usr/local/ && \
+    ln -s /usr/local/instantclient_12_2 /usr/local/instantclient && \
+    ln -s /usr/local/instantclient/libclntsh.so.12.1 /usr/local/instantclient/libclntsh.so && \
+    export LD_LIBRARY_PATH=/usr/local/instantclient && \
+    if [ $(php -r "echo PHP_MAJOR_VERSION;") = "5" ]; then \
+      echo 'instantclient,/usr/local/instantclient' | pecl install oci8-2.0.12; \
+    else \
+      echo 'instantclient,/usr/local/instantclient' | pecl install oci8; \
+    fi && \
+    cp /tmp/oci8.ini /etc/php/${LARADOCK_PHP_VERSION}/cli/conf.d/oci8.ini \
+;fi
+RUN rm -rf /tmp/*.zip && \
+    rm -rf /tmp/oci8.ini && \
+    rm -rf /tmp/instantclient
+
 ###########################################################################
 # MySQL Client:
 ###########################################################################
