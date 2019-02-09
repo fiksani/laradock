@@ -41,8 +41,6 @@ volumes:
     driver: ${VOLUMES_DRIVER}
   mosquitto:
     driver: ${VOLUMES_DRIVER}
-  oraclexe:
-    driver: ${VOLUMES_DRIVER}
 
 services:
 
@@ -93,7 +91,6 @@ services:
           - INSTALL_PYTHON=${WORKSPACE_INSTALL_PYTHON}
           - INSTALL_IMAGE_OPTIMIZERS=${WORKSPACE_INSTALL_IMAGE_OPTIMIZERS}
           - INSTALL_IMAGEMAGICK=${WORKSPACE_INSTALL_IMAGEMAGICK}
-          - INSTALL_OCI8=${WORKSPACE_INSTALL_OCI8}
           - INSTALL_TERRAFORM=${WORKSPACE_INSTALL_TERRAFORM}
           - INSTALL_DUSK_DEPS=${WORKSPACE_INSTALL_DUSK_DEPS}
           - INSTALL_PG_CLIENT=${WORKSPACE_INSTALL_PG_CLIENT}
@@ -1424,7 +1421,7 @@ services:
         - "${MANTICORE_HTTP_PORT}:9308"        
       networks:
         - backend
-=======
+
 ### ORACLE-XE ################################################
     oraclexe:
       image: wnameless/oracle-xe-11g
