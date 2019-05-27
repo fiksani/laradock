@@ -674,3 +674,9 @@ MANTICORE_HTTP_PORT=9308
 PGADMIN_PORT=5050
 PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org
 PGADMIN_DEFAULT_PASSWORD=admin
+
+### ORACLE XE ##################################################
+ORACLE_PORT=32118
+ORACLE_EM_PORT=35518
+ORACLE_PASSWORD=Oracle18!
+ORACLE_XE_RPM=oracle-database-xe-18c-1.0-1.x86_64.rpm

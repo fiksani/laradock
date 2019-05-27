@@ -1427,11 +1427,12 @@ services:
 
 ### ORACLE-XE ################################################
     oraclexe:
-      image: wnameless/oracle-xe-11g
+      build:
+        context: ./oracle-xe
       volumes:
-        - "${DATA_PATH_HOST}/oraclexe:/u01/app/oracle/oradata/oracle11g-data/"
+        - "${DATA_PATH_HOST}/oraclexe:/opt/oracle/oradata"
       ports:
-        - 49161:1521
-        - 49162:8080
+        - 32118:1521
+        - 35518:5500
       networks:
         - backend
