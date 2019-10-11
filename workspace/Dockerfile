@@ -15,7 +15,7 @@
 ARG LARADOCK_PHP_VERSION
 
 # FROM laradock/workspace:2.2-${LARADOCK_PHP_VERSION}
-FROM letsdockerize/laradock-workspace:2.4-${LARADOCK_PHP_VERSION}
+FROM letsdockerize/laradock-workspace:2.5-${LARADOCK_PHP_VERSION}
 
 LABEL maintainer="Mahmoud Zalt <mahmoud@zalt.me>"
 
@@ -981,6 +981,12 @@ RUN if [ ${INSTALL_MYSQL_CLIENT} = true ]; then \
 ###########################################################################
 
 RUN set -xe; php -v | head -n 1 | grep -q "PHP ${LARADOCK_PHP_VERSION}."
+
+# NGROK
+RUN curl -s -O https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip \
+    && unzip ngrok-stable-linux-amd64.zip \
+    && mv ngrok /usr/local/bin/ \
+    && rm -f ngrok-stable-linux-amd64.zip
 
 #
 #--------------------------------------------------------------------------

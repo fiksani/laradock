@@ -1432,7 +1432,7 @@ services:
       volumes:
         - "${DATA_PATH_HOST}/oraclexe:/opt/oracle/oradata"
       ports:
-        - 32118:1521
+        - 1521:1521
         - 35518:5500
       networks:
         - backend
